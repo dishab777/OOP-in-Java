@@ -1,0 +1,11 @@
+# Compiled Java class files
+*.class
+
+# VS Code directory
+.vscode/
+
+# Build and IDE metadata (Eclipse / General)
+bin/
+.classpath
+.project
+.settings/
