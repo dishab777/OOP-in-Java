@@ -1,0 +1,3 @@
+Employee Name: Disha Bothra
+Base Salary   : Rs. 500000.0
+Total Salary  : Rs. 600000.0 (including 20% bonus)
