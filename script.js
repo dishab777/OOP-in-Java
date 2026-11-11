@@ -7,6 +7,10 @@ const T=(h,rows)=>'<div class="tw"><table><tr>'+h.map(x=>'<th>'+x+'</th>').join(
 const S=[
 {g:'1 · Foundations',id:'oop-intro',t:'Introduction to OOP',h:`
 <h3>Why study OOP?</h3><p>Procedural languages (C, Pascal) are great for small, linear tasks but struggle when programs grow. OOP (Java, C++, Python) organises code around real-world <b>objects</b> instead of sequences of functions. It is the industry standard for managing large-scale complexity, improving reusability and keeping data secure.</p>
+<h3>History and evolution of programming</h3><p>Programming styles developed as software problems grew. Machine code and assembly operate close to the hardware; procedural languages group instructions into functions; structured and modular design organize larger programs into manageable routines. Object-oriented technology groups related state and behavior into cooperating objects, which helps model domains with many entities and relationships.</p>${T(['Period / idea','What changed'],[['Early computing','Machine instructions and assembly gave direct control but tied programs closely to hardware.'],['Procedural programming','Languages such as C and Pascal organize work into procedures/functions; effective for clear, linear tasks, but shared data can become difficult to protect as systems grow.'],['Simula (1960s)','Introduced class/object ideas to model simulations.'],['Smalltalk (1970s)','Developed a strongly object-centered style and message passing.'],['C++ (1980s)','Brought object-oriented features into a widely used systems language while retaining procedural programming.'],['Java (1995)','Popularized a managed, bytecode-based object-oriented platform for networked and cross-platform software.'],['Modern practice','Languages such as C#, Java and Python support object-oriented styles; many teams also combine functional and procedural techniques.']])}
+<p>OOP grew from the need to organize increasingly complex software; it did not make earlier paradigms obsolete. Choose a design that fits the problem rather than forcing every small task into a large class hierarchy.</p>
+<h3>Where OOP is useful</h3><ul><li><b>Business and enterprise systems:</b> customers, accounts, orders and payments.</li><li><b>Games and simulations:</b> players, vehicles, events and world state.</li><li><b>Mobile, desktop and web applications:</b> screens, services, models and reusable components.</li><li><b>Libraries and APIs:</b> encapsulated objects with a stable public contract.</li></ul>
+<div class="box note"><b>Java fact</b>Java programs commonly use objects, but Java is not “everything is an object”: its eight primitive types (<code>int</code>, <code>boolean</code>, etc.) are not objects. Wrapper classes let primitives participate in object-based APIs.</div>
 <h3>What is OOP?</h3><p>A programming paradigm that organises software around <b>objects</b> rather than functions and logic. An object bundles <b>data (attributes)</b> and <b>methods (behaviour)</b>, making programs modular, reusable, scalable and maintainable.</p>
 ${K(['Based on objects and classes','Improves code reusability','Programs are easier to understand and manage','Learning goals: history, evolution of paradigms, need for OOP, benefits, real-world applications'])}
 <h3>Class</h3><p>A <b>blueprint/template</b> used to create objects; defines properties (data) and behaviours (methods). A Java class can contain: <b>fields, methods, constructors, blocks, nested classes</b>.</p>
@@ -151,21 +155,56 @@ s1.equals(s3);   // true
 s1 == s2;        // true  (same pool object)
 s1 == s3;        // false (different objects)
 "Sachin".compareTo("Ratan");   // positive (S - R = 1)`)}
+<h3>Useful String methods</h3>${T(['Method','Purpose / example'],[['<code>length()</code>','Number of UTF-16 code units; <code>"Java".length()</code> is 4.'],['<code>charAt(i)</code>','Character at zero-based index <code>i</code>; out-of-range index throws <code>IndexOutOfBoundsException</code>.'],['<code>substring(begin, end)</code>','Slice from begin (inclusive) to end (exclusive).'],['<code>indexOf(value)</code>','First matching index, or <code>-1</code> if not found.'],['<code>contains(text)</code>','Whether the text occurs in the string.'],['<code>startsWith()</code> / <code>endsWith()</code>','Check a prefix or suffix.'],['<code>replace(old, new)</code>','Return a new string with matching characters/sequences replaced.'],['<code>trim()</code> / <code>strip()</code>','Return text without surrounding whitespace; <code>strip()</code> uses Unicode whitespace (Java 11+).'],['<code>toUpperCase()</code> / <code>toLowerCase()</code>','Return a case-converted string; case conversion is locale-sensitive.'],['<code>split(regex)</code>','Split using a regular expression and return a <code>String[]</code>.']])}${C(`String text = "Java programming";
+System.out.println(text.length());              // 16
+System.out.println(text.substring(5, 16));      // programming
+System.out.println(text.indexOf("program"));    // 5
+System.out.println(text.contains("Java"));      // true
+System.out.println("Java".replace('a', 'o'));   // Jovo
+String[] words = "red,green,blue".split(",");`)}<div class="box note"><b>Substring rule</b>For <code>substring(start, end)</code>, start is included and end is excluded; the result has <code>end - start</code> characters. A bad range throws an index exception. Use <code>equals()</code>, not <code>==</code>, when comparing string contents.</div>
 <h3>Concatenation</h3><p>Two ways: <code>+</code> operator and <code>concat()</code>. <code>+</code> also joins primitives, evaluated left to right.</p>${Q(`String s = 50+30+"Sachin"+40+40;`,'<b>80Sachin4040</b>')}
 <h3>StringBuffer &amp; StringBuilder</h3><p>Both create <b>mutable</b> strings. StringBuffer is synchronized (thread-safe); StringBuilder (JDK 1.5+) is <b>non-synchronized</b> and faster. Constructors: empty (capacity <b>16</b>), from a String, from an int capacity.</p>
 ${T(['String','StringBuffer'],[['Immutable','Mutable'],['Slow, more memory when concatenating a lot (new instance each time)','Fast, less memory for concatenation'],['Overrides equals() — compares content','Does not override equals()'],['Uses string constant pool','Uses heap memory']])}
+<p>Common mutable operations include <code>append()</code>, <code>insert()</code>, <code>replace()</code>, <code>delete()</code>, <code>reverse()</code>, <code>length()</code> and <code>capacity()</code>. They modify and return the same buffer, so chained calls are possible.</p>${C(`StringBuilder builder = new StringBuilder("Java");
+builder.append(" OOP").insert(0, "Learn ");
+builder.replace(0, 5, "Study");
+System.out.println(builder);        // Study Java OOP
+System.out.println(builder.length());
+System.out.println(builder.capacity());`)}<div class="box key"><b>Which one should I choose?</b>Use <code>String</code> for fixed text and ordinary values; <code>StringBuilder</code> for repeated edits in one thread; <code>StringBuffer</code> when synchronized mutable text is specifically required.</div>
 <h3>toString()</h3><p>Returns the string representation of an object; <code>println(obj)</code> calls it internally. Default output is like <code>Student@1fee6fc</code>; override it for meaningful output.</p>${C(`class Student {
   int rollno; String name; String city;
   Student(int r, String n, String c) { rollno=r; name=n; city=c; }
   public String toString() { return rollno + " " + name + " " + city; }
 }`)}
-<h3>Arrays</h3><p>A collection of <b>similar-type</b> elements in <b>contiguous memory</b>. A Java array is an <b>object</b> (inherits Object), index starts at 0, size via <code>length</code>. Anonymous arrays are supported (not in C/C++).</p>${C(`int[] a;  int []b;  int c[];          // valid declarations
+<h3>Arrays</h3><p>A fixed-length, indexed sequence of values of one element type. A Java array is an <b>object</b> (inherits Object), index starts at 0, size via <code>length</code>. Anonymous arrays are supported (not in C/C++).</p>${C(`int[] a;  int []b;  int c[];          // valid declarations
 int a1[] = new int[5];                    // size required with new
 int[] n = {33, 3, 4, 5};                  // literal init
 for (int i = 0; i < a1.length; i++) System.out.println(a1[i]);`)}
+${N('The JVM specification does not promise a physical memory layout for array elements. A quiz asking for an array’s total bytes must specify whether to include the runtime object header and alignment.')}
 <h5>Passing arrays &amp; anonymous arrays</h5><p>Only the array name (base address/reference) is passed.</p>${C(`static void min(int arr[]) { /* ... */ }
 min(new int[]{10, 22, 44, 66});   // anonymous array`)}
 <h5>Multidimensional</h5>${C(`int[][] arr = new int[3][3];   // only the first dimension is mandatory`)}
+<h3>Linked lists</h3><p>A linked list stores values in separate <b>nodes</b>. Each node holds data and a reference to the next node; the list begins at a <code>head</code>, and the final node points to <code>null</code>. Unlike an array, nodes are not stored in one contiguous block and the list can grow without choosing a fixed length first.</p>${C(`class Node {
+  int value;
+  Node next;
+  Node(int value) { this.value = value; }
+}
+
+class IntLinkedList {
+  private Node head;
+
+  void addFirst(int value) {
+    Node node = new Node(value);
+    node.next = head;
+    head = node;
+  }
+
+  void printAll() {
+    for (Node current = head; current != null; current = current.next) {
+      System.out.println(current.value);
+    }
+  }
+}`)}${T(['Operation','Array','Singly linked list'],[['Read item by index','O(1)','O(n) traversal'],['Insert/remove at the front','O(n) to shift items','O(1) when the head is known'],['Memory','Elements + array capacity','Node data + link references']])}<div class="box note"><b>Java library note</b><code>java.util.LinkedList</code> is a built-in doubly linked implementation of <code>List</code> and <code>Deque</code>. The node example above teaches the structure; it is not the same implementation. For frequent indexed access, an <code>ArrayList</code> is usually a better fit.</div>
 <h3>String &amp; array traps</h3>
 <ul><li><code>int arr[2];</code> → compile error (size can’t be in declaration).</li><li><code>System.out.print(arr)</code> → <code>[I@hashcode</code> (class@hex hash).</li><li><code>arr1 == arr2</code> → “Not same”; <code>Arrays.equals(arr1, arr2)</code> → “Same”.</li><li>Default values: ints 0, objects null.</li><li>Loop with extra <code>i++</code> inside prints <b>0 2 4 6 8</b>.</li><li><code>"I LIKE JAVA"</code>: <code>charAt(3)</code> = <b>K</b>, <code>length()</code> = <b>11</b>.</li><li><code>"hello".equals("world")</code> false; equals("hello") true; <code>"I"+"like"+"Java"</code> = IlikeJava.</li><li>Empty string: <code>""</code> or <code>new String()</code>. Method for char at index: <code>charAt()</code>.</li><li><code>k=arr[i++ + ++i-1]</code> with {2,3,4,5,6}, i=1 → <b>5 3</b>.</li></ul>`},
 {g:'3 · Core OOP Building Blocks',id:'constructors',t:'Constructors',h:`
@@ -267,7 +306,17 @@ Integer a = b;                          // autoboxing
 Character c = 'a';                      // char → Character
 ArrayList<Integer> list = new ArrayList<>();
 list.add(25);                           // autoboxing
-int num = list.get(0);                  // unboxing`)}`},
+int num = list.get(0);                  // unboxing`)}
+<h3>Useful wrapper methods</h3>${T(['Operation','Example and result type'],[['Parse text to a primitive','<code>int n = Integer.parseInt("42");</code> → <code>int</code>'],['Convert text to a wrapper','<code>Integer count = Integer.valueOf("42");</code> → <code>Integer</code>'],['Format a value as text','<code>String text = Integer.toString(42);</code>'],['Compare values','<code>Integer.compare(3, 5)</code> returns a negative/zero/positive value'],['Character checks','<code>Character.isDigit(\'7\')</code>, <code>Character.toUpperCase(\'a\')</code>'],['Limits','<code>Integer.MAX_VALUE</code>, <code>Double.MIN_VALUE</code> (smallest positive non-zero double)']])}${C(`String input = "42";
+int value = Integer.parseInt(input);       // primitive result
+Integer object = Integer.valueOf(input);    // wrapper result
+double decimal = Double.parseDouble("3.5");
+String text = String.valueOf(value);
+boolean yes = Boolean.parseBoolean("true");`)}
+<h3>Conversion pitfalls</h3><ul><li>Invalid numeric text such as <code>Integer.parseInt("4x")</code> throws <code>NumberFormatException</code>; validate or catch it when input is untrusted.</li><li>Unboxing a <code>null</code> wrapper throws <code>NullPointerException</code>.</li><li>Wrapper objects are immutable: changing a boxed value creates/assigns another value; it does not mutate the existing object.</li><li>Compare numeric values with <code>equals()</code> or primitive values—not <code>==</code>, which tests reference identity for wrapper objects.</li></ul>
+${Q(`Integer a = null; int n = a;`,'<b>NullPointerException</b> during automatic unboxing.')}
+${Q(`Integer.parseInt("101")`,'Primitive <b>int 101</b>.')}
+${N('Generics and standard collections use reference types, so use <code>ArrayList&lt;Integer&gt;</code>, not <code>ArrayList&lt;int&gt;</code>. Java automatically boxes/unboxes at many assignment, argument and return boundaries.')}`},
 {g:'5 · Inheritance &amp; Polymorphism',id:'inheritance',t:'Inheritance &amp; super',h:`
 <h3>Definition</h3><p>A mechanism where one class acquires properties and behaviour of another (<b>IS-A</b>, parent-child). Reusability: reuse fields/methods of an existing class when creating a new one.</p>
 ${T(['Term','Also called'],[['Subclass','Derived / extended / child class'],['Superclass','Base / parent class'],['Reusability','Reuse existing fields and methods']])}
@@ -479,10 +528,47 @@ class Multi3 implements Runnable {          // 2. implement Runnable
 Thread t = new Thread("My first thread"); t.start(); System.out.println(t.getName());`)}
 ${N('<code>start()</code> creates a <b>new call stack</b> and a new thread. Calling <code>run()</code> directly runs it like a normal method in the <b>current</b> thread (main). Starting a thread twice throws <code>IllegalThreadStateException</code>.')}
 <h3>Thread scheduler</h3><ul><li><b>First Come First Serve:</b> t1 (arrival 0) first … t4 (arrival 3) last.</li><li><b>Time-slicing:</b> each thread gets a fixed slice (e.g. 2 s), then the CPU passes to the next.</li></ul>
+<h3>Thread priority</h3><p>Java priorities are integer hints from <code>Thread.MIN_PRIORITY</code> (1) through <code>Thread.NORM_PRIORITY</code> (5) to <code>Thread.MAX_PRIORITY</code> (10). Use <code>setPriority()</code> and <code>getPriority()</code> when needed. A priority is a scheduler hint—not a guarantee that one thread runs first or receives more time on every JVM/operating system.</p>${C(`Thread worker = new Thread(task, "worker");
+worker.setPriority(Thread.NORM_PRIORITY);
+System.out.println(worker.getPriority()); // 5`)}
 <h3>sleep() and join()</h3>${C(`public static void sleep(long mls) throws InterruptedException
 public static void sleep(long mls, int n) throws InterruptedException
 Thread.sleep(500);        // halts the current thread for 500 ms
 t.join();                 // current thread waits until t finishes`)}<p>Two threads each printing 1–4 with <code>sleep(500)</code> produce interleaved output (1 1 2 2 3 3 4 4). <code>join()</code> throws <code>InterruptedException</code> if interrupted.</p>
+<h3>Synchronization and race conditions</h3><p>When threads read and update shared mutable state at the same time, their operations can interleave and lose updates. A <code>synchronized</code> method or block uses an object's monitor so only one thread at a time executes the protected critical section for that monitor.</p>${C(`class Counter {
+  private int value;
+  public synchronized void increment() { value++; }
+  public synchronized int getValue() { return value; }
+}`)}<p>An instance synchronized method locks <code>this</code>; a static synchronized method locks the <code>Class</code> object. Keep critical sections short and use the same lock for related reads and writes.</p>
+<h3>Inter-thread communication: wait and notify</h3><p>Threads can coordinate through an object's monitor. Call <code>wait()</code>, <code>notify()</code> or <code>notifyAll()</code> only while holding that object's monitor (inside a synchronized method/block). <code>wait()</code> releases the monitor while waiting; after notification, the thread must reacquire it before continuing.</p>${C(`class OneSlot {
+  private String message;
+  private boolean ready;
+
+  public synchronized void put(String value) throws InterruptedException {
+    while (ready) wait();               // wait for the consumer
+    message = value;
+    ready = true;
+    notifyAll();
+  }
+
+  public synchronized String take() throws InterruptedException {
+    while (!ready) wait();              // wait for the producer
+    String value = message;
+    ready = false;
+    notifyAll();
+    return value;
+  }
+}`)}<div class="box note"><b>Why a while loop?</b>A waiting thread may wake without the condition being true, or another thread may consume the change first. Recheck the condition after every wake-up. Prefer <code>notifyAll()</code> when multiple kinds of waiters may share a monitor.</div>
+<h3>Interrupt, do not forcibly stop</h3><p>Older APIs offered <code>Thread.stop()</code>, <code>suspend()</code> and <code>resume()</code>; they are deprecated and unsafe because they can interrupt code while shared state is inconsistent or leave locks held. Use cooperative cancellation: set a flag or call <code>interrupt()</code>, let the task clean up, and optionally wait with <code>join()</code>. Restore the interrupt status when catching <code>InterruptedException</code> if the method cannot propagate it.</p>${C(`class Worker implements Runnable {
+  @Override public void run() {
+    while (!Thread.currentThread().isInterrupted()) {
+      doOneUnitOfWork();
+    }
+    cleanUp();
+  }
+  private void doOneUnitOfWork() { /* work */ }
+  private void cleanUp() { /* release resources */ }
+}`)}
 <h3>Practice</h3>
 ${Q(`Thread myThread = new MyThread(); myThread.run();  // prints Thread.currentThread().getName()`,'<b>In run method; thread name is: main</b> then <b>In main method; thread name is: main</b> (option c)')}
 ${Q(`Thread thread = new Thread(new MyThread()); thread.run(); thread.run(); thread.start();`,'<b>main, main, Thread-0</b>')}
@@ -611,12 +697,395 @@ ${R('GC reclaims <b>unreachable</b> objects; <code>System.gc()</code> is only a 
 ${N('Exam checklist: 4 pillars with examples · JDK/JRE/JVM · primitives table · operators &amp; precedence · loops · String pool · constructors vs methods · this/super/static · access modifiers · overloading vs overriding · abstract vs final · nested class types · autoboxing/unboxing.')}
 ${T(['Keyword','Use'],[['this','Current object'],['super','Immediate parent object / constructor'],['static','Belongs to class'],['final','Constant / no override / no inherit'],['abstract','Incomplete class/method'],['new','Creates object on heap'],['extends','Inheritance'],['implements','Class implements interface(s)'],['try / catch / finally','Handle exceptions'],['throw / throws','Raise / declare an exception'],['start()','Begins a new thread (not run())'],['package / import','Organise / use classes']])}`}
 ];
-const nav=document.getElementById('nav'),m=document.getElementById('m');
-let h='<h1>OOP in Java</h1><small>CSC2104 · Study Guide</small>',lg='';
+S.unshift({
+g:'0 · Start Here',id:'course-map',t:'Course Map &amp; Learning Outcomes',h:`
+<p>Welcome to a beginner-first path through <b>Object-Oriented Programming in Java (CSC 2104)</b>. You can start with no Java experience: follow the topic list from top to bottom, type each example yourself, then use the exam-practice and revision chapters to check your understanding.</p>
+<div class="box key"><b>What you will learn</b>Build Java programs from the ground up, model a problem using classes and objects, and explain the OOP principles with working examples. The guide moves from syntax and data to object design, inheritance, abstraction and the supporting Java runtime topics.</div>
+<h3>Course outcomes</h3><ol><li>Define OOP concepts using classes and objects to solve problems.</li><li>Apply encapsulation and abstraction through objects and classes.</li><li>Demonstrate inheritance, polymorphism and interfaces.</li><li>Analyse exception handling, multithreading and garbage collection.</li></ol>
+<h3>Recommended order of study</h3><ol><li><b>Understand the model:</b> OOP, classes, objects and the four pillars.</li><li><b>Learn Java:</b> how a Java program runs, variables, data types, conversion and operators.</li><li><b>Control a program:</b> conditions, loops, arrays and strings.</li><li><b>Build classes:</b> fields, methods, constructors, argument passing, <code>this</code>, <code>static</code> and nested classes.</li><li><b>Model relationships:</b> inheritance, access modifiers, <code>super</code>, overloading, overriding, abstract classes and interfaces.</li><li><b>Understand the runtime:</b> wrappers and garbage collection.</li><li><b>Complete the practical syllabus:</b> exceptions, console/file I/O, packages and threads.</li><li><b>Prepare for assessment:</b> trace code by hand, solve the slide quizzes and explain the project design.</li></ol>
+<h3>Assessment plan from the course handout</h3>${T(['Assessment','Components','Marks'],[['Mid-term examination','Closed book','30'],['Class work sessional','Two quizzes (5 each): 10 · Attendance: 5 · Mini project + viva or NPTEL: 15','30'],['End-term examination','Closed book','40'],['Total','','100']])}
+<h3>Course syllabus checklist</h3><ul><li>History and evolution of OOP; benefits and applications; Java, C# and C++.</li><li>Programming fundamentals: control flow, operators, data types, type conversion, wrapper classes and arrays.</li><li>Classes and objects; reference variables; methods; constructors; overloading; objects as parameters; argument passing; returning objects; recursion; access control; <code>final</code>; nested and inner classes.</li><li>Console input/output and file handling.</li><li>Inheritance, multilevel hierarchies, access modifiers, overriding and abstract classes.</li><li>Exception types, custom exceptions, try/catch, <code>throw</code> and <code>throws</code>.</li><li>Threads, synchronization and inter-thread communication.</li></ul>
+<div class="box note"><b>Study advice</b>Write each code example in a small Java file, compile it, predict the output before running it, and explain every line aloud. In exams, distinguish a compile-time error from a runtime result before tracing values.</div>
+<h3>Recommended references</h3><ul><li>Herbert Schildt, <i>Java: The Complete Reference</i>, 13th edition.</li><li>E. Balagurusamy, <i>Object Oriented Programming with Java</i>.</li><li>Use the uploaded lecture slides as the course-specific source of examples and terminology.</li></ul>`});
+S.splice(S.findIndex(s=>s.id==='datatypes'),0,{
+g:'2 · Java Fundamentals',id:'fundamentals',t:'Java Programming Fundamentals',h:`
+<p>A Java program is a set of instructions written in source code. Start with the basic shape below, then learn what each part means before adding decisions, loops and objects.</p>
+${C(`public class Welcome {
+  public static void main(String[] args) {
+    System.out.println("Hello, Java!");
+  }
+}`)}
+<h3>Read the program from the outside in</h3><ul><li><code>public class Welcome</code> declares a class; save this source as <code>Welcome.java</code> because a public top-level class name must match its file name.</li><li><code>main</code> is the standard entry point the Java launcher looks for. <code>String[] args</code> receives command-line arguments.</li><li><code>System.out.println</code> prints a line to the console. Java statements generally end in a semicolon; braces group class and method bodies.</li><li>Java is case-sensitive: <code>main</code> and <code>Main</code> are different identifiers.</li></ul>
+<h3>Compile and run</h3>${C(`javac Welcome.java
+java Welcome`)}<p>The compiler checks the source and produces bytecode in <code>Welcome.class</code>. The Java Virtual Machine (JVM) loads and executes that bytecode. The JDK includes the tools to compile and run; the JVM is the execution engine.</p>
+<h3>Variables, literals and expressions</h3><p>A variable is a named, typed storage location. A literal is a value written directly in code. An expression combines values, variables and operators to produce a value.</p>${C(`int attempts = 3;       // declaration + initialization
+double price = 19.95;    // decimal literal
+char grade = 'A';        // one character uses single quotes
+String name = "Mina";    // text uses double quotes
+boolean passed = true;
+int next = attempts + 1;`)}
+<h3>Names, comments and blocks</h3><ul><li>Identifiers can use letters, digits, <code>_</code> and <code>$</code>, but cannot start with a digit or be a reserved keyword. Convention: <code>UpperCamelCase</code> for classes and <code>lowerCamelCase</code> for variables and methods.</li><li><code>// line comment</code>, <code>/* block comment */</code> and <code>/** documentation comment */</code> explain intent; comments do not run as Java code.</li><li>Variables declared inside a method or block are local and must be assigned before use. Fields receive default values; local variables do not.</li></ul>
+<h3>Command-line arguments</h3>${C(`public class Greet {
+  public static void main(String[] args) {
+    if (args.length > 0) {
+      System.out.println("Hello, " + args[0]);
+    }
+  }
+}
+// Compile: javac Greet.java
+// Run:     java Greet Mina`)}<div class="box note"><b>Remember</b>For a first run, compile the file containing the public class, then launch using the class name without <code>.java</code> or <code>.class</code>.</div>`});
+S.splice(S.findIndex(s=>s.id==='strings-arrays'),0,{
+g:'3 · Core OOP Building Blocks',id:'methods',t:'Methods, Objects &amp; Recursion',h:`
+<p>A <b>method</b> is a named block of code that performs a task. Methods let you divide a problem into smaller reusable steps. A method can receive input through parameters and return a result to its caller.</p>
+<h3>Method declaration and call</h3>${C(`accessModifier static? returnType methodName(parameterList) {
+ // method body
+ return value;  // omit this line when returnType is void
+}
+
+class Calculator {
+ static int add(int left, int right) {
+   return left + right;
+ }
+}
+int total = Calculator.add(4, 6);`)}
+<ul><li><b>Parameters</b> are the variable names/types in the declaration; <b>arguments</b> are the actual values supplied by the call.</li><li>The declared return type must match the value returned. Use <code>void</code> when no value is returned.</li><li>A local variable exists only inside its block/method. Each method call gets its own stack frame, which is removed when the call returns.</li><li>Instance methods can use instance fields directly; static methods have no current object and need an object reference to use instance members.</li></ul>
+<h3>Java is always pass-by-value</h3><p>Java copies each argument into the parameter. For a primitive, the copied value is the number/boolean/character. For an object, the copied value is the reference. The method can mutate the shared object through that reference, but assigning a different reference to the parameter does not change the caller's variable.</p>${C(`class Box {
+ int value;
+ Box(int value) { this.value = value; }
+}
+public class PassingObjects {
+ static void change(Box box) { box.value = 9; }
+ static void replace(Box box) { box = new Box(0); }
+
+ public static void main(String[] args) {
+   Box original = new Box(2);
+   change(original);
+   System.out.println(original.value); // 9: shared object was mutated
+   replace(original);
+   System.out.println(original.value); // 9: only the local copy was reassigned
+ }
+}`)}
+<div class="box rem"><b>Must remember</b>Passing an object does <b>not</b> mean Java passes the variable by reference. The reference itself is copied by value; both references initially point to the same object.</div>
+<h3>Objects as parameters and return values</h3><p>A method may accept an object, inspect it or update its state. It may also return an object reference—for example a factory method. The caller should check the object's contract and avoid unexpected <code>null</code> returns.</p>${C(`static Box createBox(int value) {
+ return new Box(value);
+}
+static void printBox(Box box) {
+ System.out.println(box.value);
+}
+Box fresh = createBox(12);
+printBox(fresh);`)}
+<p>To return several related values, define a small class or record rather than trying to return multiple values separately.</p>
+<h3>Recursion</h3><p>A recursive method solves a problem by calling itself with a smaller input. Every correct recursive solution needs (1) a <b>base case</b> that stops, and (2) a <b>progress step</b> that moves toward that base case.</p>${C(`static long factorial(int n) {
+ if (n < 0) throw new IllegalArgumentException("n must be non-negative");
+ if (n <= 1) return 1;                 // base case
+ return n * factorial(n - 1);          // smaller subproblem
+}
+System.out.println(factorial(5));        // 120`)}
+${T(['Trace','What happens'],[['factorial(5)','5 × factorial(4)'],['factorial(4) … factorial(2)','Each call waits for a smaller call'],['factorial(1)','Base case returns 1'],['Return/unwind','2 × 1, then 3 × 2, then 4 × 6, then 5 × 24 = 120']])}
+<h3>Recursion exam checklist</h3><ul><li>Trace calls downward to the base case, then trace return values back up.</li><li>Confirm that every path reaches a base case. Without one, calls continue until <code>StackOverflowError</code>.</li><li>Recursion uses one stack frame per active call; for a simple count/sum, a loop may use less memory.</li><li>Java does not guarantee tail-call optimization; do not rely on tail recursion to avoid stack growth.</li></ul>
+${Q(`factorial(4) using the method above`,'<b>24</b>: 4 × 3 × 2 × 1.')}
+${Q(`static int sum(int n){ if(n==0)return 0; return n+sum(n-1); }  sum(4)`,'<b>10</b>: 4 + 3 + 2 + 1 + 0.')}`});
+S[S.length-1].g='12 · Final Review';
+S.splice(S.length-1,0,{
+g:'10 · Exam Preparation',id:'exam-practice',t:'Slide Quiz &amp; Worked Answers',h:`
+<p>Attempt each output question on paper first. Trace class initialization, instance initialization, constructor calls and assignment rules in order. Then open the answer and explanation.</p>
+${N('A final variable cannot be reassigned. If a practice snippet attempts it, the correct answer is a compile-time error—not a printed value.')}
+<div id="quiz-bank"></div>`},{
+g:'11 · Applied Practice',id:'projects',t:'Mini-Project Workshop: SkillBarter',h:`
+<p>The course mini-project handout offers a broad selection of Java application ideas. This chapter turns one of them—<b>SkillBarter</b>, a peer-to-peer skill-exchange platform—into a worked example of applying OOP rather than treating concepts as isolated definitions.</p>
+<h3>Problem and use case</h3><p>Students may have skills to teach and skills they want to learn, but need a structured way to find a suitable peer, arrange a session and give feedback. A learner searches for a skill; the system ranks matching mentors; the learner schedules a session; after completion, the learner rates the mentor. One student can be both mentor and learner.</p>
+<h3>Design the model before coding</h3>${T(['Type','Responsibility','OOP concept'],[['<code>User</code> (abstract)','Shared identity: user ID, name, email; declares profile display','Abstraction'],['<code>Student</code>','Extends User; offers/wants skills and holds ratings','Inheritance, encapsulation'],['<code>Skill</code>','Skill name, category, level and learning goal','Class and object'],['<code>Session</code>','Mentor, learner, skill, date/time and status','Object relationships, enum'],['<code>Rating</code>','Score (1–5), feedback, reviewer and recipient','Validation, encapsulation'],['<code>Match</code>','Candidate mentor, skill and calculated score','Encapsulation'],['<code>SkillProvider</code>, <code>Rateable</code>','Describe capabilities a student can perform','Interfaces'],['<code>SkillExchangeSystem</code>','Registers students, finds mentors and schedules sessions','Service / collections']])}
+<h3>Use the four pillars in the design</h3><ul><li><b>Encapsulation:</b> keep fields private; validate a rating before storing it; return a defensive copy of mutable lists.</li><li><b>Inheritance:</b> <code>Student extends User</code> to reuse shared identity data.</li><li><b>Polymorphism:</b> override <code>displayProfile()</code>; accept a <code>User</code> reference and let the runtime choose the student's implementation.</li><li><b>Abstraction:</b> make <code>User</code> abstract and use interfaces for independent capabilities such as offering skills and receiving ratings.</li></ul>
+<h3>Small, complete Java model</h3>${C(`import java.util.ArrayList;
+import java.util.List;
+
+interface SkillProvider {
+  void addOfferedSkill(String skill);
+  List<String> getOfferedSkills();
+}
+
+abstract class User {
+  private final int userId;
+  private final String name;
+
+  User(int userId, String name) {
+    this.userId = userId;
+    this.name = name;
+  }
+
+  public int getUserId() { return userId; }
+  public String getName() { return name; }
+  public abstract void displayProfile();
+}
+
+class Student extends User implements SkillProvider {
+  private final List<String> offeredSkills = new ArrayList<>();
+
+  Student(int userId, String name) {
+    super(userId, name);
+  }
+
+  @Override
+  public void addOfferedSkill(String skill) {
+    if (skill == null || skill.isBlank()) {
+      throw new IllegalArgumentException("Skill must not be blank");
+    }
+    offeredSkills.add(skill);
+  }
+
+  @Override
+  public List<String> getOfferedSkills() {
+    return List.copyOf(offeredSkills);
+  }
+
+  @Override
+  public void displayProfile() {
+    System.out.println(getName() + " offers " + offeredSkills);
+  }
+}
+
+public class SkillBarterDemo {
+  public static void main(String[] args) {
+    Student mentor = new Student(1, "Ravi");
+    mentor.addOfferedSkill("Python");
+    User profile = mentor;            // upcasting
+    profile.displayProfile();         // Student implementation runs
+  }
+}`)}
+<h3>Match candidates with a score</h3><p>The presentation's example uses <code>score = min(100, level × 15 + average rating × 8)</code>. With <code>NONE=0</code>, <code>BEGINNER=1</code>, <code>INTERMEDIATE=2</code> and <code>ADVANCED=3</code>, Ravi (Advanced, rated 5.0) scores <b>85</b> (3 × 15 + 5 × 8), while an unrated Beginner such as Meera scores <b>15</b>. Sort matches highest-first with a <code>Comparator</code>.</p>
+<div class="box note"><b>Design check</b>Define the enum order and treat an unrated mentor's average rating as 0. The score is capped at 100; document that rule so test results are predictable.</div>
+<h3>Implement features in small steps</h3><ol><li>Define model types, enums and input validation.</li><li>Add student registration and unique-ID checks.</li><li>Store lookups in a <code>HashMap</code> and session history in an <code>ArrayList</code>.</li><li>Search offered skills, compute match scores and sort results.</li><li>Schedule, complete and rate a session; reject invalid state transitions.</li><li>Test normal cases and edge cases: unknown user, duplicate ID, blank skill, rating outside 1–5 and rating an incomplete session.</li><li>Add persistence only after the in-memory model works. For database-backed versions, use a DAO, prepared statements and try-with-resources; keep credentials in environment configuration.</li></ol>
+<h3>Other project options in the course brief</h3><p>The complete original handout lists <b>30</b> application ideas, including expense settlement, personal finance, task/habit management, campus events, parking, lost and found, attendance, polling, file organization, meeting scheduling, inventory, railway reservations, patient triage, scholarship allocation, timetabling, exam generation, seating allocation, CPU scheduling, document search, log analysis, text compression, concurrent banking, ticket reservation, downloads and real-time multi-user systems. The full brief is included below.</p>`});
+
+const sourceDeckForLesson={
+  'course-map':'1. Orientation.pptx',
+  'oop-intro':'2. Introduction to OOP.pptx',
+  'fundamentals':'3. Java Programming Basics.pptx',
+  'datatypes':'Type Casting.pptx',
+  'strings-arrays':'Strings and Arrays in Java.pptx',
+  'constructors':'Constructor.pptx',
+  'this':'This Keyword.pptx',
+  'static':'Static keyword.pptx',
+  'gc':'Garbage Collection.pptx',
+  'wrapper':'Wrapper Classes.pptx',
+  'inheritance':'Inheritance 1.pptx',
+  'overloading':'Method Overloading in Java.pptx',
+  'overriding':'Runtime Polymorphism.pptx',
+  'abstract':'Abstract Class.pptx',
+  'nested':'Nested Classes in Java.pptx',
+  'exam-practice':'Test Your Skills.pptx',
+  'projects':'SkillBarter.pptx'
+};
+const materials=window.courseMaterials;
+if(!materials||!Array.isArray(materials.decks)||!materials.projectBrief)throw new Error('The local course-material archive could not be loaded.');
+for(const file of Object.values(sourceDeckForLesson)){
+  if(!materials.decks.some(deck=>deck.file===file))throw new Error('Missing local presentation archive: '+file);
+}
+function escapeHtml(value){
+  return String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function renderSlideArchive(file){
+  const deck=materials.decks.find(item=>item.file===file);
+  if(!deck)throw new Error('Missing local presentation archive: '+file);
+  return '<details class="source-archive"><summary>Original lecture slides · '+escapeHtml(deck.title)+' · '+deck.slides.length+' slides</summary><p>All slide text and image-only slides are preserved here, including examples and practice questions. Open a slide to review its original content.</p>'+
+    deck.slides.map(slide=>{
+      const text=slide.text?'<pre>'+escapeHtml(slide.text)+'</pre>':'<p class="empty-slide">No editable slide text was available; embedded visual content is shown below when present.</p>';
+      const images=(slide.images||[]).map((image,index)=>'<img loading="lazy" decoding="async" src="data:'+image.mime+';base64,'+image.data+'" alt="Embedded image '+(index+1)+' from '+escapeHtml(deck.title)+' slide '+slide.number+'">').join('');
+      return '<details class="source-slide"><summary>Slide '+slide.number+' · '+escapeHtml(slide.title)+'</summary>'+text+(images?'<div class="slide-images">'+images+'</div>':'')+'</details>';
+    }).join('')+'</details>';
+}
+function renderProjectBrief(){
+  return '<details class="source-archive"><summary>Original mini-project brief · '+materials.projectBrief.pages.length+' pages</summary><p>Extracted text from the complete uploaded project brief, including its full list of proposed applications, features and suggested Java concepts.</p><div class="source-pages">'+
+    materials.projectBrief.pages.map(page=>'<section class="source-page"><h5>Page '+page.number+'</h5><pre>'+escapeHtml(page.text)+'</pre></section>').join('')+'</div></details>';
+}
+const quizQuestions=[
+  {code:`public class Main {
+  { System.out.println("1"); }
+  static { System.out.println("2"); }
+  Main() { System.out.println("3"); }
+  static { System.out.println("4"); }
+  { System.out.println("5"); }
+  public static void main(String[] args) {
+    new Main();
+    System.out.println("6");
+  }
+}`,answer:'2 4 1 5 3 6',why:'Static blocks run once in source order before main. For the new object, instance blocks run in source order before the constructor.'},
+  {code:`class Myclass {
+  Myclass() { System.out.println("constructor"); }
+  static void m1() { System.out.println("static method"); }
+  void m2() { System.out.println("instance method"); }
+  static { System.out.println("static block"); }
+  { System.out.println("instance block"); }
+  public static void main(String[] args) {
+    Myclass obj = new Myclass();
+    m1();
+    obj.m2();
+  }
+}`,answer:'static block → instance block → constructor → static method → instance method',why:'Class initialization precedes main; object initialization precedes the constructor; the two method calls then happen in the order written.'},
+  {code:`class Myclass {
+  static { System.out.println("static block"); }
+  { System.out.println("instance block"); }
+  public static void main(String[] args) {
+    new Myclass();
+    new Myclass();
+    new Myclass();
+  }
+}`,answer:'Static block once, then instance block three times.',why:'Static initialization is per class load. Instance initialization runs separately for each constructed instance.'},
+  {code:`class Constructor {
+  static int x = 1;
+  Constructor(int n) { x = n; }
+  public static void main(String[] args) {
+    Constructor obj = new Constructor(4);
+    System.out.println(Constructor.x);
+  }
+}`,answer:'4',why:'The constructor assigns 4 to the shared static field.'},
+  {code:`class Constructor {
+  final int x = 1;
+  Constructor(int n) { x = x + n; }
+}`,answer:'Compile-time error',why:'The final field was already initialized to 1 and cannot be assigned again. A blank final field could instead be assigned once in the constructor.'},
+  {code:`class Main {
+  int x = 5;
+  Main() { this.x = 7; }
+  public static void main(String[] args) {
+    Main obj = new Main();
+    System.out.println(obj.x);
+  }
+}`,answer:'7',why:'this.x refers to the current object’s instance field; the constructor changes it before the print.'},
+  {code:`class Main {
+  int x = 7;
+  Main() { System.out.print(x + " "); }
+  Main(int x) { this.x = x; System.out.print(x + " "); }
+  public static void main(String[] args) {
+    new Main(5);
+    new Main();
+  }
+}`,answer:'5 7',why:'The parameter named x shadows the field in Main(int x), so its print uses the parameter 5. The no-argument constructor reads the field value 7.'},
+  {code:`class Student {
+  private Student() { }
+}
+public class CtorEx {
+  public static void main(String[] args) {
+    Student student = new Student();
+  }
+}`,answer:'Compile-time error',why:'The private constructor is accessible only inside Student. A factory method inside Student could create and return an instance.'},
+  {code:`class Student {
+  private Student() { }
+}
+public class CtorEx {
+  public static void main(String[] args) {
+    Student student = new Student();
+  }
+}`,answer:'Compile-time error',why:'This is a repeated slide question with the same access-control issue: another top-level class cannot call Student’s private constructor.'},
+  {code:`class A {
+  { System.out.println("1"); }
+  static { System.out.println("2"); }
+  A() { System.out.println("3"); }
+  static { System.out.println("4"); }
+  { System.out.println("5"); }
+}
+public class Main {
+  public static void main(String[] args) {
+    new A();
+    System.out.println("6");
+  }
+}`,answer:'2 4 1 5 3 6',why:'Static blocks run first and in source order. Then the instance blocks, constructor and remaining main statement run.'},
+  {code:`class Demo {
+  int x;
+  { x = 20; System.out.println("initializer 1: " + x); }
+  { x = 30; System.out.println("initializer 2"); }
+  Demo() { System.out.println("constructor: " + x); }
+  public static void main(String[] args) {
+    new Demo();
+    System.out.println("Hello World");
+  }
+}`,answer:'initializer 1: 20 → initializer 2 → constructor: 30 → Hello World.',why:'Instance initializer blocks execute in their declaration order before the constructor body.'},
+  {code:`class Demo {
+  int x;
+  { System.out.println("initializer 1"); }
+  { System.out.println("initializer 2"); }
+  Demo() { System.out.println("default constructor"); }
+  void demo() { System.out.println("not a constructor"); }
+  public static void main(String[] args) {
+    Demo d = new Demo();
+    d.demo();
+  }
+}`,answer:'initializer 1 → initializer 2 → default constructor → not a constructor.',why:'A method has a return type, even if it is void; therefore demo() is an ordinary method, not a constructor.'},
+  {code:`class A {
+  { System.out.println("1"); }
+  static { System.out.println("2"); }
+  A() { System.out.println("3"); }
+  static { System.out.println("4"); }
+  { System.out.println("5"); }
+}
+class Main {
+  public static void main(String[] args) {
+    new A();
+    System.out.println("6");
+  }
+}`,answer:'2 4 1 5 3 6',why:'The relevant Java initialization order is unchanged: static blocks, then instance blocks, then constructor, then the next statement.'},
+  {code:`class Myclass {
+  private static int x = 10;
+  static { x++; }
+  static { ++x; }
+  { x--; }
+  public static void main(String[] args) {
+    new Myclass();
+    new Myclass();
+    new Myclass();
+    System.out.println(x);
+  }
+}`,answer:'9',why:'Start at 10, add 2 once during class initialization, then subtract 1 for each of the 3 constructed objects: 10 + 2 − 3 = 9.'},
+  {code:`class Demo {
+  int x;
+  { x = 20; System.out.println("initializer 1: " + x); }
+  { x = 30; System.out.println("initializer 2"); }
+  Demo() { System.out.println("default: " + x); }
+  void demo() { System.out.println("not a constructor"); }
+  public static void main(String[] args) {
+    Demo d = new Demo();
+    d.demo();
+    System.out.println("Hello World");
+  }
+}`,answer:'initializer 1: 20 → initializer 2 → default: 30 → not a constructor → Hello World.',why:'The blocks run in declaration order before the constructor. The method is called only when main explicitly invokes it.'}
+];
+function renderQuizBank(){
+  return quizQuestions.map((q,index)=>'<details><summary>Question '+(index+1)+' · Predict the result</summary>'+C(q.code)+'<p><b>Answer:</b> '+escapeHtml(q.answer)+'</p><p>'+escapeHtml(q.why)+'</p></details>').join('');
+}
+
+const nav=document.getElementById('nav'),m=document.getElementById('m'),scrim=document.getElementById('scrim'),menuButton=document.getElementById('mb');
+let h='<div class="nav-brand"><span class="nav-mark">CSC 2104 · Study guide</span><h1>OOP in Java</h1><p>Start from the basics. Learn by doing.</p></div><label class="nav-search"><span>Find a topic</span><input id="topic-search" type="search" placeholder="Search chapters…" autocomplete="off"></label><div class="nav-list">',lg='';
 S.forEach((s,i)=>{if(s.g!==lg){h+='<h4>'+s.g+'</h4>';lg=s.g}h+='<a href="#'+s.id+'" data-i="'+i+'">'+s.t+'</a>'});
+h+='</div><div class="nav-foot">'+materials.decks.length+' presentations · '+materials.slideCount+' slides · text and visual slides included</div>';
 nav.innerHTML=h;
-function show(){const id=location.hash.slice(1),i=Math.max(0,S.findIndex(s=>s.id===id)),s=S[i];
-m.innerHTML='<h2>'+s.t+'</h2><div class="sub">'+s.g+' · Topic '+(i+1)+' of '+S.length+'</div>'+s.h+'<div class="pn">'+(i?'<button onclick="location.hash=\''+S[i-1].id+'\'">← '+S[i-1].t+'</button>':'<span></span>')+(i<S.length-1?'<button onclick="location.hash=\''+S[i+1].id+'\'">'+S[i+1].t+' →</button>':'<span></span>')+'</div>';
-nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',+a.dataset.i===i));nav.classList.remove('open');window.scrollTo(0,0)}
-addEventListener('hashchange',show);show();
-document.getElementById('mb').onclick=()=>nav.classList.toggle('open');
+function show(){
+  const id=location.hash.slice(1),i=Math.max(0,S.findIndex(s=>s.id===id)),s=S[i],previous=S[i-1],next=S[i+1];
+  const archive=sourceDeckForLesson[s.id]?renderSlideArchive(sourceDeckForLesson[s.id]):'';
+  const projectBrief=s.id==='projects'?renderProjectBrief():'';
+  const back=previous?'<button type="button" data-target="'+previous.id+'">← '+previous.t+'</button>':'<span></span>';
+  const forward=next?'<button type="button" data-target="'+next.id+'">'+next.t+' →</button>':'<span></span>';
+  const lessonHtml=s.id==='exam-practice'?s.h.replace('<div id="quiz-bank"></div>','<div id="quiz-bank">'+renderQuizBank()+'</div>'):s.h;
+  m.innerHTML='<div class="lesson-topline"><span>'+s.g+'</span><span class="dot">•</span><span>LESSON '+(i+1)+' OF '+S.length+'</span></div><h2>'+s.t+'</h2><div class="sub">Read the explanation, study the examples, then try the questions before opening their answers.</div>'+lessonHtml+archive+projectBrief+'<div class="pn">'+back+forward+'</div>';
+  m.querySelectorAll('.pn button[data-target]').forEach(button=>button.addEventListener('click',()=>{location.hash=button.dataset.target}));
+  nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',+a.dataset.i===i));
+  const active=nav.querySelector('a.on');if(active)active.scrollIntoView({block:'nearest'});
+  nav.classList.remove('open');scrim.classList.remove('active');menuButton.setAttribute('aria-expanded','false');
+  window.scrollTo(0,0);
+}
+function filterTopics(){
+  const query=document.getElementById('topic-search').value.trim().toLowerCase();
+  nav.querySelectorAll('a').forEach(link=>{link.hidden=!link.textContent.toLowerCase().includes(query)});
+  nav.querySelectorAll('h4').forEach(heading=>{
+    let sibling=heading.nextElementSibling,visible=false;
+    while(sibling&&sibling.tagName!=='H4'){if(sibling.tagName==='A'&&!sibling.hidden)visible=true;sibling=sibling.nextElementSibling}
+    heading.hidden=!visible;
+  });
+}
+function toggleMenu(open){
+  nav.classList.toggle('open',open);scrim.classList.toggle('active',open);
+  menuButton.setAttribute('aria-expanded',String(open));
+}
+addEventListener('hashchange',show);
+show();
+document.getElementById('topic-search').addEventListener('input',filterTopics);
+menuButton.addEventListener('click',()=>toggleMenu(!nav.classList.contains('open')));
+scrim.addEventListener('click',()=>toggleMenu(false));

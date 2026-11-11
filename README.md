@@ -143,49 +143,55 @@ The repository also includes an **interactive, browser-based study guide** desig
 
 | Section | Topics |
 |---|---|
-| Foundations | Introduction to OOP, Introduction to Java |
-| Java Fundamentals | Data types, access and type casting, operators, decision making and loops |
-| Core OOP Building Blocks | Strings and arrays, constructors, `this`, `static` |
+| Start Here | Course outcomes, syllabus map, assessment plan, recommended learning sequence |
+| Foundations | Introduction to OOP, Java history and platform, classes and objects, four OOP pillars |
+| Java Fundamentals | Program structure, variables, data types, access and type casting, operators, decision making and loops |
+| Core OOP Building Blocks | Strings and arrays, methods, constructors, `this`, `static`, nested classes |
 | Memory & Utility Classes | Garbage collection, wrapper classes |
 | Inheritance & Polymorphism | Inheritance and `super`, method overloading, overriding, runtime polymorphism, abstract classes, `final`, interfaces |
-| Advanced Structure | Nested and inner classes, packages |
+| Advanced Structure | Packages, nested and inner classes |
 | Exceptions & Threads | Exception handling, multithreading |
 | Java I/O | Console input/output, character streams, byte streams |
-| Revision | Last-minute revision |
+| Exam Preparation | Slide quiz questions with worked output traces |
+| Applied Practice | SkillBarter OOP project design and the complete mini-project brief |
+| Revision | Last-minute revision and keyword checklist |
 
 ### Study Guide Files
 
-Keep the three study guide files together in the same folder:
+Keep all four study guide files together in the same folder:
 
 ```text
-Study Guide/
+OOP-in-Java/
 ├── index.html
 ├── style.css
-└── script.js
+├── script.js
+└── course-materials.js
 ```
 
-- `index.html` – Main study guide page and topic content.
+- `index.html` – Main study guide page.
 - `style.css` – Styling, layout, and responsive presentation.
-- `script.js` – Topic navigation and interactive behaviour.
+- `script.js` – Topic navigation, lessons, exam questions, and interactive behaviour.
+- `course-materials.js` – Text from all 17 available presentations (562 slides, including embedded images for image-only slides) and the three-page mini-project brief.
 
 ### How to Open the Study Guide
 
-1. Open the `Study Guide` folder.
-2. Make sure all three files are present in the same directory.
-3. Open `index.html` in a modern web browser.
-4. Select topics from the navigation panel to study.
+1. Make sure all four files are present in the same directory.
+2. Open `index.html` in a modern web browser.
+3. Select a lesson from the topic panel. Use the topic search to find a chapter.
+4. Open **Original lecture slides** or the mini-project brief inside a lesson to review the extracted source text.
 
 No Java compiler, backend server, package manager, or build process is required to use the study guide.
 
 ### Study Guide Features
 
-- Topic-wise navigation grouped into sections.
-- Explanations of Java and OOP concepts.
-- Java code examples and comparison tables.
+- Topic-wise navigation grouped into a recommended study sequence.
+- Beginner-focused explanations, Java code examples, and comparison tables.
 - Key-point, important-note, and revision callouts.
-- Output-prediction questions with expandable answers.
+- Searchable topic list and responsive side panel.
+- Worked exam questions with output traces and explanations.
+- A complete OOP project walkthrough and all project ideas from the uploaded brief.
+- Expandable slide-by-slide text and image-only slide content from the original presentations.
 - Previous/next topic navigation.
-- Responsive layout with a collapsible topic menu.
 - Light and dark appearance support based on browser/device colour preference.
 
 ---
