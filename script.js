@@ -785,77 +785,12 @@ ${T(['Trace','What happens'],[['factorial(5)','5 × factorial(4)'],['factorial(4
 <h3>Recursion exam checklist</h3><ul><li>Trace calls downward to the base case, then trace return values back up.</li><li>Confirm that every path reaches a base case. Without one, calls continue until <code>StackOverflowError</code>.</li><li>Recursion uses one stack frame per active call; for a simple count/sum, a loop may use less memory.</li><li>Java does not guarantee tail-call optimization; do not rely on tail recursion to avoid stack growth.</li></ul>
 ${Q(`factorial(4) using the method above`,'<b>24</b>: 4 × 3 × 2 × 1.')}
 ${Q(`static int sum(int n){ if(n==0)return 0; return n+sum(n-1); }  sum(4)`,'<b>10</b>: 4 + 3 + 2 + 1 + 0.')}`});
-S[S.length-1].g='12 · Final Review';
+S[S.length-1].g='11 · Final Review';
 S.splice(S.length-1,0,{
 g:'10 · Exam Preparation',id:'exam-practice',t:'Slide Quiz &amp; Worked Answers',h:`
 <p>Attempt each output question on paper first. Trace class initialization, instance initialization, constructor calls and assignment rules in order. Then open the answer and explanation.</p>
 ${N('A final variable cannot be reassigned. If a practice snippet attempts it, the correct answer is a compile-time error—not a printed value.')}
-<div id="quiz-bank"></div>`},{
-g:'11 · Applied Practice',id:'projects',t:'Mini-Project Workshop: SkillBarter',h:`
-<p>The course mini-project handout offers a broad selection of Java application ideas. This chapter turns one of them—<b>SkillBarter</b>, a peer-to-peer skill-exchange platform—into a worked example of applying OOP rather than treating concepts as isolated definitions.</p>
-<h3>Problem and use case</h3><p>Students may have skills to teach and skills they want to learn, but need a structured way to find a suitable peer, arrange a session and give feedback. A learner searches for a skill; the system ranks matching mentors; the learner schedules a session; after completion, the learner rates the mentor. One student can be both mentor and learner.</p>
-<h3>Design the model before coding</h3>${T(['Type','Responsibility','OOP concept'],[['<code>User</code> (abstract)','Shared identity: user ID, name, email; declares profile display','Abstraction'],['<code>Student</code>','Extends User; offers/wants skills and holds ratings','Inheritance, encapsulation'],['<code>Skill</code>','Skill name, category, level and learning goal','Class and object'],['<code>Session</code>','Mentor, learner, skill, date/time and status','Object relationships, enum'],['<code>Rating</code>','Score (1–5), feedback, reviewer and recipient','Validation, encapsulation'],['<code>Match</code>','Candidate mentor, skill and calculated score','Encapsulation'],['<code>SkillProvider</code>, <code>Rateable</code>','Describe capabilities a student can perform','Interfaces'],['<code>SkillExchangeSystem</code>','Registers students, finds mentors and schedules sessions','Service / collections']])}
-<h3>Use the four pillars in the design</h3><ul><li><b>Encapsulation:</b> keep fields private; validate a rating before storing it; return a defensive copy of mutable lists.</li><li><b>Inheritance:</b> <code>Student extends User</code> to reuse shared identity data.</li><li><b>Polymorphism:</b> override <code>displayProfile()</code>; accept a <code>User</code> reference and let the runtime choose the student's implementation.</li><li><b>Abstraction:</b> make <code>User</code> abstract and use interfaces for independent capabilities such as offering skills and receiving ratings.</li></ul>
-<h3>Small, complete Java model</h3>${C(`import java.util.ArrayList;
-import java.util.List;
-
-interface SkillProvider {
-  void addOfferedSkill(String skill);
-  List<String> getOfferedSkills();
-}
-
-abstract class User {
-  private final int userId;
-  private final String name;
-
-  User(int userId, String name) {
-    this.userId = userId;
-    this.name = name;
-  }
-
-  public int getUserId() { return userId; }
-  public String getName() { return name; }
-  public abstract void displayProfile();
-}
-
-class Student extends User implements SkillProvider {
-  private final List<String> offeredSkills = new ArrayList<>();
-
-  Student(int userId, String name) {
-    super(userId, name);
-  }
-
-  @Override
-  public void addOfferedSkill(String skill) {
-    if (skill == null || skill.isBlank()) {
-      throw new IllegalArgumentException("Skill must not be blank");
-    }
-    offeredSkills.add(skill);
-  }
-
-  @Override
-  public List<String> getOfferedSkills() {
-    return List.copyOf(offeredSkills);
-  }
-
-  @Override
-  public void displayProfile() {
-    System.out.println(getName() + " offers " + offeredSkills);
-  }
-}
-
-public class SkillBarterDemo {
-  public static void main(String[] args) {
-    Student mentor = new Student(1, "Ravi");
-    mentor.addOfferedSkill("Python");
-    User profile = mentor;            // upcasting
-    profile.displayProfile();         // Student implementation runs
-  }
-}`)}
-<h3>Match candidates with a score</h3><p>The presentation's example uses <code>score = min(100, level × 15 + average rating × 8)</code>. With <code>NONE=0</code>, <code>BEGINNER=1</code>, <code>INTERMEDIATE=2</code> and <code>ADVANCED=3</code>, Ravi (Advanced, rated 5.0) scores <b>85</b> (3 × 15 + 5 × 8), while an unrated Beginner such as Meera scores <b>15</b>. Sort matches highest-first with a <code>Comparator</code>.</p>
-<div class="box note"><b>Design check</b>Define the enum order and treat an unrated mentor's average rating as 0. The score is capped at 100; document that rule so test results are predictable.</div>
-<h3>Implement features in small steps</h3><ol><li>Define model types, enums and input validation.</li><li>Add student registration and unique-ID checks.</li><li>Store lookups in a <code>HashMap</code> and session history in an <code>ArrayList</code>.</li><li>Search offered skills, compute match scores and sort results.</li><li>Schedule, complete and rate a session; reject invalid state transitions.</li><li>Test normal cases and edge cases: unknown user, duplicate ID, blank skill, rating outside 1–5 and rating an incomplete session.</li><li>Add persistence only after the in-memory model works. For database-backed versions, use a DAO, prepared statements and try-with-resources; keep credentials in environment configuration.</li></ol>
-<h3>Other project options in the course brief</h3><p>The complete original handout lists <b>30</b> application ideas, including expense settlement, personal finance, task/habit management, campus events, parking, lost and found, attendance, polling, file organization, meeting scheduling, inventory, railway reservations, patient triage, scholarship allocation, timetabling, exam generation, seating allocation, CPU scheduling, document search, log analysis, text compression, concurrent banking, ticket reservation, downloads and real-time multi-user systems. The full brief is included below.</p>`});
+<div id="quiz-bank"></div>`});
 
 const sourceDeckForLesson={
   'course-map':'1. Orientation.pptx',
@@ -873,11 +808,10 @@ const sourceDeckForLesson={
   'overriding':'Runtime Polymorphism.pptx',
   'abstract':'Abstract Class.pptx',
   'nested':'Nested Classes in Java.pptx',
-  'exam-practice':'Test Your Skills.pptx',
-  'projects':'SkillBarter.pptx'
+  'exam-practice':'Test Your Skills.pptx'
 };
 const materials=window.courseMaterials;
-if(!materials||!Array.isArray(materials.decks)||!materials.projectBrief)throw new Error('The local course-material archive could not be loaded.');
+if(!materials||!Array.isArray(materials.decks))throw new Error('The local course-material archive could not be loaded.');
 for(const file of Object.values(sourceDeckForLesson)){
   if(!materials.decks.some(deck=>deck.file===file))throw new Error('Missing local presentation archive: '+file);
 }
@@ -893,10 +827,6 @@ function renderSlideArchive(file){
       const images=(slide.images||[]).map((image,index)=>'<img loading="lazy" decoding="async" src="data:'+image.mime+';base64,'+image.data+'" alt="Embedded image '+(index+1)+' from '+escapeHtml(deck.title)+' slide '+slide.number+'">').join('');
       return '<details class="source-slide"><summary>Slide '+slide.number+' · '+escapeHtml(slide.title)+'</summary>'+text+(images?'<div class="slide-images">'+images+'</div>':'')+'</details>';
     }).join('')+'</details>';
-}
-function renderProjectBrief(){
-  return '<details class="source-archive"><summary>Original mini-project brief · '+materials.projectBrief.pages.length+' pages</summary><p>Extracted text from the complete uploaded project brief, including its full list of proposed applications, features and suggested Java concepts.</p><div class="source-pages">'+
-    materials.projectBrief.pages.map(page=>'<section class="source-page"><h5>Page '+page.number+'</h5><pre>'+escapeHtml(page.text)+'</pre></section>').join('')+'</div></details>';
 }
 const quizQuestions=[
   {code:`public class Main {
@@ -1060,11 +990,10 @@ nav.innerHTML=h;
 function show(){
   const id=location.hash.slice(1),i=Math.max(0,S.findIndex(s=>s.id===id)),s=S[i],previous=S[i-1],next=S[i+1];
   const archive=sourceDeckForLesson[s.id]?renderSlideArchive(sourceDeckForLesson[s.id]):'';
-  const projectBrief=s.id==='projects'?renderProjectBrief():'';
   const back=previous?'<button type="button" data-target="'+previous.id+'">← '+previous.t+'</button>':'<span></span>';
   const forward=next?'<button type="button" data-target="'+next.id+'">'+next.t+' →</button>':'<span></span>';
   const lessonHtml=s.id==='exam-practice'?s.h.replace('<div id="quiz-bank"></div>','<div id="quiz-bank">'+renderQuizBank()+'</div>'):s.h;
-  m.innerHTML='<div class="lesson-topline"><span>'+s.g+'</span><span class="dot">•</span><span>LESSON '+(i+1)+' OF '+S.length+'</span></div><h2>'+s.t+'</h2><div class="sub">Read the explanation, study the examples, then try the questions before opening their answers.</div>'+lessonHtml+archive+projectBrief+'<div class="pn">'+back+forward+'</div>';
+  m.innerHTML='<div class="lesson-topline"><span>'+s.g+'</span><span class="dot">•</span><span>LESSON '+(i+1)+' OF '+S.length+'</span></div><h2>'+s.t+'</h2><div class="sub">Read the explanation, study the examples, then try the questions before opening their answers.</div>'+lessonHtml+archive+'<div class="pn">'+back+forward+'</div>';
   m.querySelectorAll('.pn button[data-target]').forEach(button=>button.addEventListener('click',()=>{location.hash=button.dataset.target}));
   nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',+a.dataset.i===i));
   const active=nav.querySelector('a.on');if(active)active.scrollIntoView({block:'nearest'});
