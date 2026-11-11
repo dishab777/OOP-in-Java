@@ -1,0 +1,23 @@
+{
+  "name": "primary",
+  "version": "1.0.0",
+  "description": "Welcome to the **OOP-in-Java** repository! This repository captures a structured, progressive journey through Object-Oriented Programming concepts, core Java APIs, exception handling, file stream operations, multithreading, and package architecture.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dishab777/OOP-in-Java.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dishab777/OOP-in-Java/issues"
+  },
+  "homepage": "https://github.com/dishab777/OOP-in-Java#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
