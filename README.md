@@ -2,11 +2,15 @@
 
 Welcome to the **OOP-in-Java** repository! This repository captures a structured, progressive journey through Object-Oriented Programming concepts, core Java APIs, exception handling, file stream operations, multithreading, and package architecture.
 
+Alongside the practical laboratory programs, the repository now also includes an **interactive OOP in Java Study Guide**. Use the guide to revise concepts, understand code examples, and prepare for practical examinations and viva questions.
+
 ---
 
 ## 📌 Table of Contents
+
 - [Repository Overview](#-repository-overview)
 - [Modules & Program Index](#-modules--program-index)
+- [OOP in Java Study Guide](#-oop-in-java-study-guide)
 - [Key OOP Concepts Mastered](#-key-oop-concepts-mastered)
 - [Development & Execution Guide](#-development--execution-guide)
 - [Repository Management](#-repository-management)
@@ -15,7 +19,12 @@ Welcome to the **OOP-in-Java** repository! This repository captures a structured
 
 ## 📖 Repository Overview
 
-This codebase is organized sequentially into **13 distinct modules**, starting from foundational control structures and type conversions, progressing through core OOP pillars (Inheritance, Polymorphism, Abstraction), and concluding with system-level topics like Stream I/O, Exception Handling, Thread Synchronization, and Modular Package Design.
+This codebase is organized sequentially into **13 distinct programming modules**, starting from foundational control structures and type conversions, progressing through core OOP pillars (Inheritance, Polymorphism, Abstraction), and concluding with system-level topics like Stream I/O, Exception Handling, Thread Synchronization, and Modular Package Design.
+
+The repository contains two complementary learning resources:
+
+1. **Laboratory solutions:** Java source files organized into 13 modules, with individual programs demonstrating concepts through practical implementation.
+2. **Interactive study guide:** A browser-based reference covering the theory and important Java concepts corresponding to the practical work.
 
 ---
 
@@ -23,6 +32,7 @@ This codebase is organized sequentially into **13 distinct modules**, starting f
 
 ### 01. Programming Fundamentals
 Focuses on basic syntax, control flow, array processing, and command-line arguments.
+
 - `CommandLineAddition.java` – Command-line argument parsing and arithmetic calculation.
 - `CommandLineCalculator.java` – Interactive multi-operation CLI calculator.
 - `FibonacciSeries.java` – Iterative generation of the Fibonacci sequence.
@@ -32,6 +42,7 @@ Focuses on basic syntax, control flow, array processing, and command-line argume
 
 ### 02. Type Conversion & Wrapper Classes
 Covers primitive-to-reference type conversions, auto-boxing/unboxing, and safe parsing.
+
 - `TypeConversionDemo.java` – Implicit and explicit type casting behaviors.
 - `FloatConversionDemo.java` – Parsing floating-point primitives and wrapper instances.
 - `SafeParsingDemo.java` – Error-resilient string-to-number conversions.
@@ -39,6 +50,7 @@ Covers primitive-to-reference type conversions, auto-boxing/unboxing, and safe p
 
 ### 03. Arrays & Algorithm Implementation
 Custom array manipulation algorithms without relying on built-in collection shortcuts.
+
 - `StudentMarksTabularDemo.java` – Sorting 10 student marks, converting to grades, and tabular printing.
 - `ArraySquareSumDemo.java` – Array iteration, element squaring, and aggregate summation.
 - `DigitCombinationsDemo.java` – Generating all unique permutations of 3 input digits.
@@ -46,6 +58,7 @@ Custom array manipulation algorithms without relying on built-in collection shor
 
 ### 04. Classes, Objects, Methods & Constructors
 Constructing blueprinted entities using object state, behavior, and lifecycle management.
+
 - `ClassAndObjectDemo.java` – Basic class instantiation and method invocation.
 - `BankDemo.java` – Encapsulated account operations (deposit, withdrawal, balance checking).
 - `StudentArrayDemo.java` – Array of object instances and batch processing.
@@ -53,23 +66,27 @@ Constructing blueprinted entities using object state, behavior, and lifecycle ma
 
 ### 05. Method Overloading & Argument Passing
 Understanding compile-time polymorphism and Java's parameter passing mechanics.
+
 - `MethodOverloading.java` – Overloading methods by parameter count and datatype.
 - `PassByValueDemo.java` – Verifying Java's strictly pass-by-value evaluation strategy.
 - `RectangleDemo.java` – Method overloading applied to geometric calculations.
 
 ### 06. Inheritance & Access Modifiers
 Reusing code and establishing class hierarchies using `extends` and access controls.
+
 - `PlayerDemo.java` – Base `Player` class extended into specialized athletic roles.
 - `PrivateAccessDemo.java` – Demonstrating variable scoping and encapsulation boundaries.
 
 ### 07. Multilevel Inheritance, Overriding & Polymorphism
 Dynamic binding, runtime method dispatch, and deep inheritance trees.
+
 - `WorkerPolymorphismDemo.java` – Polymorphic hourly and salary worker calculations.
 - `TelephoneExchangeDemo.java` – Multi-level inheritance modeling telecom hierarchies.
 - `EmployeePolymorphismDemo.java` – Runtime method overriding across multi-tier employee types.
 
 ### 08. Abstract Classes & Interfaces
 Enforcing contracts and pure abstraction blueprints.
+
 - `ToTestInt.java` & `InterfaceMathDemo.java` – Defining interface contracts and concrete implementations.
 - `InterfaceMultipleMethodsDemo.java` – Implementing multiple interface contracts in a single class.
 - `AccountFileDemo.java` – Abstract account structures integrated with persistence logic.
@@ -77,6 +94,7 @@ Enforcing contracts and pure abstraction blueprints.
 
 ### 09. Console IO & File Handling
 Working with character streams (`FileReader`/`FileWriter`) and byte streams (`FileInputStream`/`FileOutputStream`).
+
 - `StudentGradeCalculator.java` – Interactive input processing via `Scanner`.
 - `SentenceAnalyzer.java` – `BufferedReader` implementation for character, word, and vowel count.
 - `EmployeeFileIODemo.java` – Writing abstract subclass calculations to text files using `FileWriter`.
@@ -86,6 +104,7 @@ Working with character streams (`FileReader`/`FileWriter`) and byte streams (`Fi
 
 ### 10. Exception Handling
 Gracefully handling runtime anomalies, standard exception hierarchies, and custom exceptions.
+
 - `DivideByZeroDemo.java` – Catching `ArithmeticException`.
 - `StudentArrayExceptionDemo.java` – Handling `ArrayIndexOutOfBoundsException`.
 - `ModulusCalculator.java` – Exception handling in numerical modulus operations.
@@ -94,6 +113,7 @@ Gracefully handling runtime anomalies, standard exception hierarchies, and custo
 
 ### 11. Multithreading & Concurrency
 Simultaneous thread execution, priorities, sleep state management, and thread synchronization.
+
 - `MultithreadingDemo.java` – Creating threads via `Thread` extension and `Runnable` interface implementation.
 - `EvenOddThreadsDemo.java` – Concurrent odd and even number generation across threads.
 - `SynchronizedThreadsDemo.java` – Resolving race conditions on shared counter variables using `synchronized`.
@@ -101,6 +121,7 @@ Simultaneous thread execution, priorities, sleep state management, and thread sy
 
 ### 12. String Handling
 Manipulating immutable `String` and mutable `StringBuffer`/`StringBuilder` objects.
+
 - `StringAnalysisDemo.java` – Analyzing string metrics, character extractions, and case conversions.
 - `StringBufferCapitalizeDemo.java` – In-place string modification and capitalizations using `StringBuffer`.
 - `StringSearchDemo.java` – Substring search and index tracking algorithms.
@@ -108,8 +129,64 @@ Manipulating immutable `String` and mutable `StringBuffer`/`StringBuilder` objec
 
 ### 13. Packages & Modular Architecture
 Encapsulating reusable components into user-defined namespaces.
+
 - `mypackage/Calculator.java` & `PackageDemo.java` – Exporting and importing utility packages.
 - `Balance/Account.java` & `AccountDemo.java` – Modular banking package declaration and external invocation.
+
+---
+
+## 📚 OOP in Java Study Guide
+
+The repository also includes an **interactive, browser-based study guide** designed to complement the Java laboratory programs. It provides topic-wise explanations, Java code snippets, key points, important notes, comparison tables, and output-prediction questions with expandable answers.
+
+### Topics Covered
+
+| Section | Topics |
+|---|---|
+| Foundations | Introduction to OOP, Introduction to Java |
+| Java Fundamentals | Data types, access and type casting, operators, decision making and loops |
+| Core OOP Building Blocks | Strings and arrays, constructors, `this`, `static` |
+| Memory & Utility Classes | Garbage collection, wrapper classes |
+| Inheritance & Polymorphism | Inheritance and `super`, method overloading, overriding, runtime polymorphism, abstract classes, `final`, interfaces |
+| Advanced Structure | Nested and inner classes, packages |
+| Exceptions & Threads | Exception handling, multithreading |
+| Java I/O | Console input/output, character streams, byte streams |
+| Revision | Last-minute revision |
+
+### Study Guide Files
+
+Keep the three study guide files together in the same folder:
+
+```text
+Study Guide/
+├── index.html
+├── style.css
+└── script.js
+```
+
+- `index.html` – Main study guide page and topic content.
+- `style.css` – Styling, layout, and responsive presentation.
+- `script.js` – Topic navigation and interactive behaviour.
+
+### How to Open the Study Guide
+
+1. Open the `Study Guide` folder.
+2. Make sure all three files are present in the same directory.
+3. Open `index.html` in a modern web browser.
+4. Select topics from the navigation panel to study.
+
+No Java compiler, backend server, package manager, or build process is required to use the study guide.
+
+### Study Guide Features
+
+- Topic-wise navigation grouped into sections.
+- Explanations of Java and OOP concepts.
+- Java code examples and comparison tables.
+- Key-point, important-note, and revision callouts.
+- Output-prediction questions with expandable answers.
+- Previous/next topic navigation.
+- Responsive layout with a collapsible topic menu.
+- Light and dark appearance support based on browser/device colour preference.
 
 ---
 
@@ -127,12 +204,15 @@ Encapsulating reusable components into user-defined namespaces.
 ## 🚀 Development & Execution Guide
 
 ### Prerequisites
+
 - **Java Development Kit (JDK)**: Version 17 or higher
 - **IDE / Editor**: Visual Studio Code with Java Extension Pack (or IntelliJ IDEA / Eclipse)
+- **Web Browser**: Any modern browser to open the interactive study guide
 
 ### Compilation & Execution Workflow
 
-#### Standard Single-File Program:
+#### Standard Single-File Program
+
 ```bash
 # Navigate to the target module directory
 cd "03 Arrays"
@@ -144,7 +224,8 @@ javac ArrayOperationsDemo.java
 java ArrayOperationsDemo
 ```
 
-#### Package-Based Program (Module 13):
+#### Package-Based Program (Module 13)
+
 Always compile and run package-dependent programs from the **root directory of the module** (e.g., `13 Packages`):
 
 ```bash
@@ -166,6 +247,7 @@ java AccountDemo
 ## ⚙ Repository Management
 
 This repository adheres to standard Git hygiene:
+
 - `.class` bytecode files are automatically ignored via `.gitignore`.
 - IDE workspace files (`.vscode/`, `.settings/`, `.project`, `.classpath`) are excluded from tracking.
 
@@ -182,3 +264,7 @@ bin/
 .project
 .settings/
 ```
+
+---
+
+**Happy Learning & Happy Coding! ☕**
